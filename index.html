@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word List</title>
+    <style>
+        *{
+            outline: 1px dashed red;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            position: relative;
+
+        }
+
+        .box {
+            position: absolute;
+            width: 200px;
+            margin: 5px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+    </div>
+    <script>
+        const VIEWPORT = document.documentElement.clientHeight
+        const BOXWIDTH = 200
+        const GAP = 10
+        let i = Math.floor(VIEWPORT/(BOXWIDTH+GAP))
+
+
+
+        function getHeight() {
+            height = Math.floor(Math.random() * 200 + 200) + "px"
+            return height
+        }
+
+        function getRandomColor() {
+            return '#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6);
+
+        }
+        function createBox() {
+            oDivBox = document.createElement('div')
+            oDivBox.classList = "box"
+            oDivBox.style.height = getHeight()
+            oDivBox.style.backgroundColor = getRandomColor()
+            return oDivBox
+        }
+
+        oContainer = document.querySelector(".container")
+        for (let i = 0; i < 60; i++) {
+            let oBox = createBox()
+            oContainer.append(oBox)
+        }
+
+
+    </script>
+</body>
+
+</html>

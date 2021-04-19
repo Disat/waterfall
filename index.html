@@ -1,67 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Word List</title>
     <style>
-        *{
-            outline: 1px dashed red;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            position: relative;
+      * {
+        outline: 1px dashed red;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        }
+      .wrap {
+        position: relative;
+        margin: 0 auto;
+        /* margin-top: 180px; */
+        display: flex;
+        justify-content: center;
+      }
 
-        .box {
-            position: absolute;
-            width: 200px;
-            margin: 5px 10px;
-        }
+      .container {
+        position: relative;
+      }
+
+      .box {
+        position: absolute;
+        transition: left 0.5s, top 0.5s;
+      }
     </style>
-</head>
+    <style>
+      /* base style */
+      .form-container {
+      }
+      .group {
+        position: relative;
+        margin-bottom: 45px;
+      }
 
-<body>
-    <div class="container">
+      /* input style  */
+      input {
+        font-size: 18px;
+        padding: 10px 10px 10px 5px;
+        display: block;
+        width: 300px;
+        border: none;
+        border-bottom: 1px solid #757575;
+      }
+      input:focus {
+        outline: none;
+      }
 
+      /* label transition */
+      label {
+        color: #999;
+        font-size: 18px;
+        font-weight: normal;
+        position: absolute;
+        pointer-events: none;
+        left: 5px;
+        top: 10px;
+        transition: 0.2s ease all;
+      }
+
+      input:focus ~ label,
+      input:valid ~ label {
+        top: -20px;
+        font-size: 14px;
+        color: #5264ae;
+      }
+
+      /* bottom bar transition */
+      .bar {
+        position: relative;
+        display: block;
+        width: 300px;
+      }
+      .bar:before,
+      .bar:after {
+        content: "";
+        height: 2px;
+        width: 0;
+        bottom: 1px;
+        position: absolute;
+        background: #5264ae;
+        transition: 0.2s ease all;
+      }
+      .bar:before {
+        left: 50%;
+      }
+      .bar:after {
+        right: 50%;
+      }
+      input:focus ~ .bar:before,
+      input:focus ~ .bar:after {
+        width: 50%;
+      }
+
+      /* Highlight */
+      .highlight {
+        position: absolute;
+        height: 60%;
+        width: 100px;
+        top: 25%;
+        left: 0;
+        pointer-events: none;
+        opacity: 0.5;
+      }
+      input:focus ~ .highlight {
+        animation: inputHighlighter 0.3s ease;
+      }
+      @keyframes inputHighlighter {
+        from {
+          background: #5264ae;
+        }
+        to {
+          width: 0;
+          background: transparent;
+        }
+      }
+    </style>
+    <style>
+      .world-form {
+        font-family: "Roboto";
+        width: 1200px;
+        margin:  0 auto;
+        display: block;
+        background: #fff;
+        /* padding: 10px 50px 50px; */
+        display: flex;
+
+      }
+      .left{
+          margin: 0 0 0 20px;
+      }
+      .right{
+        margin: 0 0 0 60px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form id="" class="world-form">
+      <div class="left">
+        <div class="group">
+          <input type="text" required />
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Name</label>
+        </div>
+        <div class="group">
+          <input type="text" required />
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Name</label>
+        </div>
+      </div>
+      <div class="right">
+        <div class="group">
+          <input type="text" required />
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Email</label>
+        </div>
+        <div class="group">
+          <input type="text" required />
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Email</label>
+        </div>
+        <div class="group">
+          <input type="text" required />
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Email</label>
+        </div>
+      </div>
+    </form>
+
+    <div class="wrap">
+      <div class="container"></div>
     </div>
-    <script>
-        const VIEWPORT = document.documentElement.clientHeight
-        const BOXWIDTH = 200
-        const GAP = 10
-        let i = Math.floor(VIEWPORT/(BOXWIDTH+GAP))
-
-
-
-        function getHeight() {
-            height = Math.floor(Math.random() * 200 + 200) + "px"
-            return height
-        }
-
-        function getRandomColor() {
-            return '#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6);
-
-        }
-        function createBox() {
-            oDivBox = document.createElement('div')
-            oDivBox.classList = "box"
-            oDivBox.style.height = getHeight()
-            oDivBox.style.backgroundColor = getRandomColor()
-            return oDivBox
-        }
-
-        oContainer = document.querySelector(".container")
-        for (let i = 0; i < 60; i++) {
-            let oBox = createBox()
-            oContainer.append(oBox)
-        }
-
-
-    </script>
-</body>
-
+    <script src="./index.js"></script>
+  </body>
 </html>

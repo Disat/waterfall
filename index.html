@@ -7,16 +7,21 @@
     <title>Word List</title>
     <style>
       * {
-        outline: 1px dashed red;
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
+      div {
+        /* outline: 1px dashed red; */
+      }
+      .root {
+        font-size: 16px;
+        font-family: "Roboto";
+      }
 
       .wrap {
         position: relative;
-        margin: 0 auto;
-        /* margin-top: 180px; */
+        margin: 0px auto 0;
         display: flex;
         justify-content: center;
       }
@@ -31,87 +36,150 @@
       }
     </style>
     <style>
-      /* base style */
+      /* header layout */
       .form-container {
+        margin: 60px auto 0px;
       }
-      .group {
+      .header-form {
+        width: 100%;
+      }
+      .header-left {
+        width: 490px;
+        padding-right: 10px;
+      }
+      .header-middle {
+        flex-grow: 1;
+        padding-left: 10px;
+      }
+      .header-right {
+        display: flex;
+        flex-direction: column;
+        width: 240px;
+      }
+      .header-content-container {
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+        margin-top: 60px;
+        margin-bottom: 60px;
+      }
+    </style>
+    <!-- 局部样式调整 -->
+    <style>
+      .header-input-group {
         position: relative;
-        margin-bottom: 45px;
+        /* margin-bottom: calc(2rem + 6px); */
+        width: 100%;
+        height: 4rem;
       }
-
-      /* input style  */
-      input {
+      .header-input-group input {
+        width: 100%;
         font-size: 18px;
-        padding: 10px 10px 10px 5px;
         display: block;
-        width: 300px;
+        height: 2rem;
+        padding: 0px 0px 5px 6px;
+
         border: none;
         border-bottom: 1px solid #757575;
       }
-      input:focus {
+      .header-input-group input:focus {
         outline: none;
       }
-
-      /* label transition */
-      label {
-        color: #999;
-        font-size: 18px;
-        font-weight: normal;
+      .header-input-group label {
         position: absolute;
+        font-size: 18px;
+        color: #999;
+        top: 0;
+        top: calc(1rem - 9px);
+        left: 6px;
+        transition: all ease 0.2s;
+        font-family: "Roboto";
         pointer-events: none;
-        left: 5px;
-        top: 10px;
-        transition: 0.2s ease all;
       }
-
-      input:focus ~ label,
-      input:valid ~ label {
-        top: -20px;
+      .header-input-group input:focus ~ label {
+        top: -18px;
         font-size: 14px;
         color: #5264ae;
       }
-
-      /* bottom bar transition */
-      .bar {
+      .header-input-group input:valid ~ label {
+        top: calc(-1rem - 2px);
+        font-size: 14px;
+        color: #5264ae;
+      }
+      .header-left-inner {
+        width: 100%;
+        display: flex;
+      }
+      .world {
+        width: 62.5%;
+        height: calc(44px + 2rem);
+      }
+      .label.header-input-group {
+        width: 62.5%;
+      }
+      .cefr.header-input-group {
+        width: 37.5%;
+      }
+      .world input {
+        height: 44px;
+        font-size: 26px;
+        padding: 10px 10px 2px 5px;
+      }
+      .world input::placeholder {
+        font-family: "Roboto";
+        color: #999;
+        transition: all ease 0.2s;
+      }
+      .world input:focus::placeholder {
+        color: transparent;
+      }
+    </style>
+    <style>
+      .effect-bar {
         position: relative;
         display: block;
-        width: 300px;
+        width: 100%;
       }
-      .bar:before,
-      .bar:after {
+      .effect-bar::before,
+      .effect-bar::after {
         content: "";
-        height: 2px;
         width: 0;
-        bottom: 1px;
+        height: 3px;
+        background-color: #5264ae;
         position: absolute;
-        background: #5264ae;
-        transition: 0.2s ease all;
+        top: -2px;
+
+        transition: all ease 0.2s;
       }
-      .bar:before {
-        left: 50%;
-      }
-      .bar:after {
+      .effect-bar::before {
         right: 50%;
       }
-      input:focus ~ .bar:before,
-      input:focus ~ .bar:after {
+      .effect-bar::after {
+        left: 50%;
+      }
+      .header-form input:focus ~ .effect-bar::before,
+      .header-form input:focus ~ .effect-bar::after {
         width: 50%;
       }
-
-      /* Highlight */
-      .highlight {
+    </style>
+    <style>
+      .effect-hilight {
         position: absolute;
-        height: 60%;
-        width: 100px;
-        top: 25%;
-        left: 0;
         pointer-events: none;
+        top: 10%;
+        left: 5px;
+        display: block;
+        width: 100px;
+        height: 1.5rem;
         opacity: 0.5;
       }
-      input:focus ~ .highlight {
-        animation: inputHighlighter 0.3s ease;
+      .world .effect-hilight {
+        height: 34px;
       }
-      @keyframes inputHighlighter {
+      .header-form input:focus ~ .effect-hilight {
+        animation: inputHighter 0.2s ease;
+      }
+      @keyframes inputHighter {
         from {
           background: #5264ae;
         }
@@ -122,66 +190,360 @@
       }
     </style>
     <style>
-      .world-form {
-        font-family: "Roboto";
-        width: 1200px;
-        margin:  0 auto;
-        display: block;
-        background: #fff;
-        /* padding: 10px 50px 50px; */
-        display: flex;
+      .header-middle-tweaks {
+        margin-top: calc(44px - 2rem);
+      }
+      .header-middle input::placeholder {
+        transition: color 0.2s ease;
+        color: #999;
+      }
+      .header-middle input:focus::placeholder {
+        color: transparent;
+      }
+    </style>
+    <style>
+      .header-right{
+        justify-content: center;
+      }
+      .add-meaning-button,.mul-meaning-button{
+        width: 3rem;
+        height: 3rem;
+        margin: 0 auto;
+        /* margin-top: calc((6rem + 44px) / 2); */
+        border: 1px solid #5264ae;
+        border-radius: 5px;
+        position: relative;
+        background-color: transparent;
+        transition: all 0.2s ease;
+        
+      }
+      .add-meaning-button{
+        margin-bottom: 10px;
+      }
+      .add-meaning-button::before,.mul-meaning-button::before {
+        position: absolute;
+        top: 50%;
+        left: 25%;
+        content: "";
+        width: 50%;
+        height: 2px;
+        background-color: #5264ae;
+      }
+      .add-meaning-button::after {
+        content: "";
+        width: 2px;
+        height: 50%;
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        background-color: #5264ae;
+      }
+      .add-meaning-button:hover,.mul-meaning-button:hover{
+        background-color: #5264ae;
+      }
+      .add-meaning-button:hover::after,
+      .add-meaning-button:hover::before,.mul-meaning-button:hover::before {
+        background-color: #fff;
+      }
 
+    </style>
+    <style>
+      .add-sentence-button {
+        width: 4rem;
+        height: 3rem;
+        border: #5264ae 1px solid;
+        border-radius: 5px;
+        margin-left: 10px;
+        position: relative;
+        transition: all 0.2s ease;
+        transform: scale(0.8);
       }
-      .left{
-          margin: 0 0 0 20px;
+      .add-sentence-button::before {
+        content: "";
+        width: 50%;
+        height: 2px;
+        background-color: #5264ae;
+        position: absolute;
+        left: 25%;
+        top: 50%;
       }
-      .right{
-        margin: 0 0 0 60px;
+      .add-sentence-button::after {
+        content: "";
+        width: 2px;
+        height: 50%;
+        background-color: #5264ae;
+        position: absolute;
+        left: calc(50% - 1px);
+        top: 25%;
+      }
+      .add-sentence-button:hover {
+        background-color: #5264ae;
+      }
+      .add-sentence-button:hover::after,
+      .add-sentence-button:hover::before {
+        background-color: #fff;
+      }
+      .header-middle-tweaks div:last-of-type {
+        height: 3rem;
+      }
+    </style>
+    <style>
+      .header-button-container {
+        display: flex;
+      }
+      .mul-sentence-button {
+        margin-left: calc(10px + 4rem + 10px);
+        width: 4rem;
+        height: 3rem;
+        border: #5264ae 1px solid;
+        border-radius: 5px;
+        margin-left: 10px;
+        position: relative;
+        transition: all 0.2s ease;
+        transform: scale(0.8);
+      }
+      .mul-sentence-button::before {
+        content: "";
+        width: 50%;
+        height: 2px;
+        background-color: #5264ae;
+        position: absolute;
+        left: 25%;
+        top: 48%;
+      }
+      .mul-sentence-button:hover {
+        background-color: #5264ae;
+      }
+      .mul-sentence-button:hover::before {
+        background-color: #fff;
+      }
+      .button:active {
+        background-color: #fff;
+      }
+      .button:active::before,
+      .button:active::after {
+        background-color: #5264ae;
+      }
+    </style>
+    <style>
+      @media screen and (max-width:1300px) {
+        .header-right{
+          display: none;
+        }
+       
+      }
+    </style>
+    <style>
+      .meaning-button-container{
+        /* width: 100%;
+        height: 80px; */
+        display: flex;
       }
     </style>
   </head>
 
   <body>
-    <form id="" class="world-form">
-      <div class="left">
-        <div class="group">
-          <input type="text" required />
-          <span class="highlight"></span>
-          <span class="bar"></span>
-          <label>Name</label>
+  <nav>
+    <div class="meaning-button-container">
+      <div class="add-meaning-button button"></div>
+      <div class="mul-meaning-button button"></div>
+    </div>
+  </nav>
+    <div class="form-container">
+      <form action="" class="header-form">
+        <!-- <div class="header-left"></div> -->
+        <div class="header-content-container meaning1">
+          <div class="header-left">
+            <div class="world header-input-group">
+              <input type="text" name="" required placeholder="World" />
+              <span class="effect-hilight"></span>
+            </div>
+            <div class="header-left-inner">
+              <div class="label header-input-group">
+                <input type="text" name="" required />
+                <span class="effect-hilight"></span>
+                <span class="effect-bar"></span>
+                <label for="">Label&Codes</label>
+              </div>
+              <div class="cefr header-input-group">
+                <input type="text" name="" required />
+                <span class="effect-hilight"></span>
+                <span class="effect-bar"></span>
+                <label for="">CEFR</label>
+              </div>
+            </div>
+            <div class="meaning header-input-group">
+              <input type="text" name="" required />
+              <span class="effect-hilight"></span>
+              <span class="effect-bar"></span>
+              <label for="">Meaning</label>
+            </div>
+          </div>
+          <div class="header-middle">
+            <div class="header-middle-tweaks">
+              <div class="sentence header-input-group">
+                <input type="text" name="" required placeholder="Sentence" />
+                <span class="effect-hilight"></span>
+                <span class="effect-bar"></span>
+              </div>
+            </div>
+            <div class="header-button-container">
+              <div class="add-sentence-button button"></div>
+              <div class="mul-sentence-button button"></div>
+            </div>
+          </div>
+          <div class="header-right">
+            <div class="add-meaning-button button"></div>
+            <div class="mul-meaning-button button"></div>
+          </div>
         </div>
-        <div class="group">
-          <input type="text" required />
-          <span class="highlight"></span>
-          <span class="bar"></span>
-          <label>Name</label>
-        </div>
-      </div>
-      <div class="right">
-        <div class="group">
-          <input type="text" required />
-          <span class="highlight"></span>
-          <span class="bar"></span>
-          <label>Email</label>
-        </div>
-        <div class="group">
-          <input type="text" required />
-          <span class="highlight"></span>
-          <span class="bar"></span>
-          <label>Email</label>
-        </div>
-        <div class="group">
-          <input type="text" required />
-          <span class="highlight"></span>
-          <span class="bar"></span>
-          <label>Email</label>
-        </div>
-      </div>
-    </form>
-
+      </form>
+    </div>
     <div class="wrap">
       <div class="container"></div>
     </div>
     <script src="./index.js"></script>
+    <script>
+      let sentenceContainer = document.querySelector(
+        ".meaning1 .header-middle-tweaks"
+      );
+      let addSentenceButton = document.querySelector(
+        ".meaning1 .add-sentence-button"
+      );
+      addSentenceButton.addEventListener("click", () => {
+        let oSentence = document.createElement("div");
+        oSentence.classList = "sentence header-input-group";
+        oSentence.innerHTML = `<input type="text" name="" required placeholder="Sentence" />
+              <span class="effect-hilight"></span>
+              <span class="effect-bar"></span>`;
+        sentenceContainer.append(oSentence);
+      });
+    </script>
+    <script>
+      let mulSentenceButton = document.querySelector(".mul-sentence-button");
+      mulSentenceButton.addEventListener("click", (e) => {
+        let length =
+          e.currentTarget.parentNode.previousElementSibling.children.length;
+        if (length <= 1) {
+          return;
+        } else {
+          let oRemoved = e.currentTarget.parentNode.previousElementSibling.querySelector(
+            "div:last-of-type"
+          );
+          oRemoved.remove();
+        }
+      });
+    </script>
+    <script>
+      let oHeaderForm = document.querySelector(".header-form");
+      let addMeaningButton = document.querySelector(".add-meaning-button");
+      addMeaningButton.addEventListener("click", () => {
+        let oHContent = document.createElement("div");
+        let oMeanings = document.querySelectorAll(".header-content-container");
+        oHContent.classList = `header-content-container meaning${
+          oMeanings.length + 1
+        }`;
+        oHContent.innerHTML = `<div class="header-left">
+            
+            <div class="header-left-inner">
+              <div class="label header-input-group">
+                <input type="text" name="" required />
+                <span class="effect-hilight"></span>
+                <span class="effect-bar"></span>
+                <label for="">Label&Codes</label>
+              </div>
+              <div class="cefr header-input-group">
+                <input type="text" name="" required />
+                <span class="effect-hilight"></span>
+                <span class="effect-bar"></span>
+                <label for="">CEFR</label>
+              </div>
+            </div>
+            <div class="meaning header-input-group">
+              <input type="text" name="" required />
+              <span class="effect-hilight"></span>
+              <span class="effect-bar"></span>
+              <label for="">Meaning</label>
+            </div>
+          </div>
+          <div class="header-middle">
+            <div class="header-middle-tweaks" style="margin-top:0px">
+              <div class="sentence header-input-group">
+                <input type="text" name="" required placeholder="Sentence" />
+                <span class="effect-hilight"></span>
+                <span class="effect-bar"></span>
+              </div>
+            </div>
+            <div class="header-button-container">
+              <div class="add-sentence-button button" data-cflag="0"></div>
+              <div class="mul-sentence-button button" data-mflag="0"></div>
+            </div>
+          </div>
+          <div class="header-right"></div>`;
+        oHeaderForm.append(oHContent);
+      });
+    </script>
+    <script>
+      let observer = new MutationObserver(addE);
+      observer.observe(oHeaderForm, {
+        childList: true,
+        subtree: true,
+      });
+      function addE() {
+        let oSentenceContainers = document.querySelectorAll(
+          ".header-middle-tweaks"
+        );
+        oSentenceContainers.forEach((sentenceContainer) => {
+          let addSentenceButton = sentenceContainer.parentNode.querySelector(
+            ".add-sentence-button"
+          );
+          let mulSentenceButton = sentenceContainer.parentNode.querySelector(
+            ".mul-sentence-button"
+          );
+
+          if (addSentenceButton.dataset.cflag == "0") {
+            addSentenceButton.addEventListener("click", () => {
+              let oSentence = document.createElement("div");
+              oSentence.classList = "sentence header-input-group";
+              oSentence.innerHTML = `<input type="text" name="" required placeholder="Sentence" />
+              <span class="effect-hilight"></span>
+              <span class="effect-bar"></span>`;
+              sentenceContainer.append(oSentence);
+            });
+            addSentenceButton.dataset.cflag = "1";
+          }
+
+          if (mulSentenceButton.dataset.mflag == "0") {
+            mulSentenceButton.addEventListener("click", (e) => {
+              let length =
+                e.currentTarget.parentNode.previousElementSibling.children
+                  .length;
+              if (length <= 1) {
+                return;
+              } else {
+                let oRemoved = e.currentTarget.parentNode.previousElementSibling.querySelector(
+                  "div:last-of-type"
+                );
+                oRemoved.remove();
+              }
+            });
+
+            mulSentenceButton.dataset.mflag = "1";
+          }
+        });
+      }
+    </script>
+    <script>
+      let oMulSentenceButton = document.querySelector(".mul-meaning-button")
+      oMulSentenceButton.addEventListener("click",(e)=>{
+        let oMeaningContainer = document.querySelector('.header-form')
+        let length = oMeaningContainer.children.length
+        if(length<= 1){
+          return
+        }else{
+          oMeaningContainer.lastElementChild.remove()
+        }
+      })
+    </script>
   </body>
 </html>

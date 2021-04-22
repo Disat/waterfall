@@ -1,14 +1,14 @@
 const BOXWIDTH = 240;
 const GAP = 10;
 const CONTAINER = document.querySelector(".container");
-
+const WIDTH_MARGIN = 40;
 function waterFall() {
-  CONTAINER.parentNode.style.width = window.innerWidth - 400 + "px";
+  CONTAINER.parentNode.style.width = window.innerWidth - WIDTH_MARGIN + "px";
   function getHeight() {
     height = Math.floor(Math.random() * 200 + 200) + "px";
     return height;
   }
-
+  
   function getRandomColor() {
     return (
       "#" +
@@ -65,13 +65,13 @@ function waterFall() {
   }
 
   CONTAINER.style.width = columns * BOXWIDTH + (columns - 1) * GAP + "px";
-//   form resize
+  //   form resize
 
-document.querySelector('.world-form').style.width = CONTAINER.style.width
+  let oform = document.querySelector(".form-container");
+  oform.style.width = CONTAINER.style.width;
 }
 
-waterFall()
+waterFall();
 window.onresize = function () {
-    waterFall();
-    
-}
+  waterFall();
+};

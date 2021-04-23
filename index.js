@@ -69,6 +69,9 @@ function waterFall() {
 
   let oform = document.querySelector(".form-container");
   oform.style.width = CONTAINER.style.width;
+  //nav resize
+
+  document.querySelector('nav').style.width = CONTAINER.style.width
 }
 
 waterFall();

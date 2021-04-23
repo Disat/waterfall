@@ -5,6 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Word List</title>
+    <style type="text/css" media="screen, print">
+      @font-face {
+        font-family: "dd";
+        src: url("/DMFT1607996674306-2.ttf");
+      }
+  
+    </style>
     <style>
       * {
         margin: 0;
@@ -38,7 +45,7 @@
     <style>
       /* header layout */
       .form-container {
-        margin: 60px auto 0px;
+        margin: 20px auto 0px;
       }
       .header-form {
         width: 100%;
@@ -202,10 +209,11 @@
       }
     </style>
     <style>
-      .header-right{
+      .header-right {
         justify-content: center;
       }
-      .add-meaning-button,.mul-meaning-button{
+      .add-meaning-button,
+      .mul-meaning-button {
         width: 3rem;
         height: 3rem;
         margin: 0 auto;
@@ -215,12 +223,12 @@
         position: relative;
         background-color: transparent;
         transition: all 0.2s ease;
-        
       }
-      .add-meaning-button{
+      .add-meaning-button {
         margin-bottom: 10px;
       }
-      .add-meaning-button::before,.mul-meaning-button::before {
+      .add-meaning-button::before,
+      .mul-meaning-button::before {
         position: absolute;
         top: 50%;
         left: 25%;
@@ -238,14 +246,15 @@
         left: 50%;
         background-color: #5264ae;
       }
-      .add-meaning-button:hover,.mul-meaning-button:hover{
+      .add-meaning-button:hover,
+      .mul-meaning-button:hover {
         background-color: #5264ae;
       }
       .add-meaning-button:hover::after,
-      .add-meaning-button:hover::before,.mul-meaning-button:hover::before {
+      .add-meaning-button:hover::before,
+      .mul-meaning-button:hover::before {
         background-color: #fff;
       }
-
     </style>
     <style>
       .add-sentence-button {
@@ -326,29 +335,75 @@
       }
     </style>
     <style>
-      @media screen and (max-width:1300px) {
-        .header-right{
+      @media screen and (max-width: 1300px) {
+        .header-right {
           display: none;
         }
-       
+        .meaning-button-container {
+          visibility: visible;
+        }
+      }
+      @media screen and (min-width: 1300px) {
+        .meaning-button-container {
+          visibility: hidden;
+        }
       }
     </style>
     <style>
-      .meaning-button-container{
+      nav {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 auto;
+        margin-top: 30px;
+      }
+      .meaning-button-container {
         /* width: 100%;
         height: 80px; */
         display: flex;
+        width: 240px;
+        justify-content: center;
+        /* transition: all 0.2s ease; */
+      }
+      .header-search {
+        width: 240px;
+      }
+      .meaning-button-container .add-meaning-button,
+      .meaning-button-container .mul-meaning-button {
+        margin: 0;
+        margin: 0 10px;
+      }
+    </style>
+    <style>
+      @font-face {
+        font-family: "DS-DIGI";
+        src: url("DS-DIGI.TTF");
+  
+      }
+
+      .digital-clock {
+        /* width: 300px;
+        height: 80px; */
+        font-family: "DS-DIGI";
+        font-size: 40px;
+        color: #4e4d4d;
+        
       }
     </style>
   </head>
 
   <body>
-  <nav>
-    <div class="meaning-button-container">
-      <div class="add-meaning-button button"></div>
-      <div class="mul-meaning-button button"></div>
-    </div>
-  </nav>
+    <nav>
+      <div class="header-search">
+        <input type="text" />
+      </div>
+      <div class="nav-time-container">
+        <div class="digital-clock">12:00</div>
+      </div>
+      <div class="meaning-button-container">
+        <div class="add-meaning-button button"></div>
+        <div class="mul-meaning-button button"></div>
+      </div>
+    </nav>
     <div class="form-container">
       <form action="" class="header-form">
         <!-- <div class="header-left"></div> -->
@@ -436,14 +491,18 @@
     </script>
     <script>
       let oHeaderForm = document.querySelector(".header-form");
-      let addMeaningButton = document.querySelector(".add-meaning-button");
-      addMeaningButton.addEventListener("click", () => {
-        let oHContent = document.createElement("div");
-        let oMeanings = document.querySelectorAll(".header-content-container");
-        oHContent.classList = `header-content-container meaning${
-          oMeanings.length + 1
-        }`;
-        oHContent.innerHTML = `<div class="header-left">
+      let addMeaningButtons = document.querySelectorAll(".add-meaning-button");
+
+      addMeaningButtons.forEach((addMeaningButton) => {
+        addMeaningButton.addEventListener("click", () => {
+          let oHContent = document.createElement("div");
+          let oMeanings = document.querySelectorAll(
+            ".header-content-container"
+          );
+          oHContent.classList = `header-content-container meaning${
+            oMeanings.length + 1
+          }`;
+          oHContent.innerHTML = `<div class="header-left">
             
             <div class="header-left-inner">
               <div class="label header-input-group">
@@ -480,7 +539,8 @@
             </div>
           </div>
           <div class="header-right"></div>`;
-        oHeaderForm.append(oHContent);
+          oHeaderForm.append(oHContent);
+        });
       });
     </script>
     <script>
@@ -534,16 +594,20 @@
       }
     </script>
     <script>
-      let oMulSentenceButton = document.querySelector(".mul-meaning-button")
-      oMulSentenceButton.addEventListener("click",(e)=>{
-        let oMeaningContainer = document.querySelector('.header-form')
-        let length = oMeaningContainer.children.length
-        if(length<= 1){
-          return
-        }else{
-          oMeaningContainer.lastElementChild.remove()
-        }
-      })
+      let oMulSentenceButtons = document.querySelectorAll(
+        ".mul-meaning-button"
+      );
+      oMulSentenceButtons.forEach((oMulSentenceButton) => {
+        oMulSentenceButton.addEventListener("click", (e) => {
+          let oMeaningContainer = document.querySelector(".header-form");
+          let length = oMeaningContainer.children.length;
+          if (length <= 1) {
+            return;
+          } else {
+            oMeaningContainer.lastElementChild.remove();
+          }
+        });
+      });
     </script>
   </body>
 </html>

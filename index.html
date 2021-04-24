@@ -10,7 +10,6 @@
         font-family: "dd";
         src: url("/DMFT1607996674306-2.ttf");
       }
-  
     </style>
     <style>
       * {
@@ -45,7 +44,7 @@
     <style>
       /* header layout */
       .form-container {
-        margin: 20px auto 0px;
+        margin: 20px auto 20px;
       }
       .header-form {
         width: 100%;
@@ -67,8 +66,8 @@
         width: 100%;
         display: flex;
         flex-flow: row wrap;
-        margin-top: 60px;
         margin-bottom: 60px;
+
       }
     </style>
     <!-- 局部样式调整 -->
@@ -334,21 +333,7 @@
         background-color: #5264ae;
       }
     </style>
-    <style>
-      @media screen and (max-width: 1300px) {
-        .header-right {
-          display: none;
-        }
-        .meaning-button-container {
-          visibility: visible;
-        }
-      }
-      @media screen and (min-width: 1300px) {
-        .meaning-button-container {
-          visibility: hidden;
-        }
-      }
-    </style>
+
     <style>
       nav {
         display: flex;
@@ -377,16 +362,41 @@
       @font-face {
         font-family: "DS-DIGI";
         src: url("DS-DIGI.TTF");
-  
       }
 
       .digital-clock {
         /* width: 300px;
         height: 80px; */
-        font-family: "DS-DIGI";
+        font-family: "DS-DIGI"; 
         font-size: 40px;
         color: #4e4d4d;
-        
+      }
+    </style>
+    <style>
+      .nav-time-container {
+        width: 240px;
+        display: flex;
+        justify-content: center;
+      }
+    </style>
+    <style>
+      @media screen and (max-width: 1300px) {
+        .meaning-button-container {
+          display: flex;
+        }
+        .header-right {
+          display: none;
+        }
+        .nav-time-container {
+          display: none;
+        }
+      }
+
+      @media screen and (min-width: 1300px) {
+        .meaning-button-container {
+          display: none;
+          /* background-color: red; */
+        }
       }
     </style>
   </head>
@@ -396,12 +406,15 @@
       <div class="header-search">
         <input type="text" />
       </div>
-      <div class="nav-time-container">
-        <div class="digital-clock">12:00</div>
-      </div>
-      <div class="meaning-button-container">
-        <div class="add-meaning-button button"></div>
-        <div class="mul-meaning-button button"></div>
+
+      <div class="nav-left">
+        <div class="meaning-button-container">
+          <div class="add-meaning-button button"></div>
+          <div class="mul-meaning-button button"></div>
+        </div>
+        <div class="nav-time-container">
+          <div class="digital-clock">24:45:00</div>
+        </div>
       </div>
     </nav>
     <div class="form-container">
@@ -458,6 +471,7 @@
       <div class="container"></div>
     </div>
     <script src="./index.js"></script>
+    <script></script>
     <script>
       let sentenceContainer = document.querySelector(
         ".meaning1 .header-middle-tweaks"
